@@ -127,9 +127,84 @@
 3. Abrir una terminal en la raíz de nuestro proyecto **file** en local y ejecutar:
     + $ git init
     + $ git add .
-4. dddd
+    + $ git commit -m "Primer commit"
+    + $ git branch -M main
+    + $ git remote add origin https://github.com/petrix12/file.git
+    + $ git push -u origin main
+
+## Deploy en Heroku
+1. Crear en la raíz del proyecto el archivo **Procfile** (sin extensión) para elegir un servidor apache en Heroku y también indicarle la ubicación del archivo **index.php**:
+    ```txt
+    web: vendor/bin/heroku-php-apache2 public/
+    ```
+2. Iniciar sesión en la página de Heroku e ir a Dashboard:
+    + https://dashboard.heroku.com/apps
+3. Crear un nuevo proyecto en **New** > **Create new app**:
+    + Nombre: solucionespp-file
+    ##### Nota: Escoger un nombre de tu elección.
+4. Ir a **Deploy** y dar clic en **GitHub**.
+5. Clic en el botón **Connect to GitHub** e ingresar las credenciales.
+6. Seleccionar el repositorio **petrix12/file** y presionar el botón **Connect**.
+7. Para tener siempre la ultima actualización de **GitHub** de nuestro proyecto presionar el botón **Enable Automatic Deploys**.
+8. Presionar el botón **Deploy Branch**.
+9. Descargar e instalar Heroku CLI:
+    + https://devcenter.heroku.com/articles/heroku-cli
+10. Ir a la terminal del proyecto y ejecutar:
+    1. Iniciar sesión en Heroku:
+        + $ heroku login
+    2. Víncular nuestro proyecto **file** con la aplicación de Heroku **solucionespp-file**:
+        + $ git remote add heroku git.heroku.com/solucionespp-file.git
+        + $ heroku git:remote -a solucionespp-file
+    3. Registrar variables de entorno de la aplicación desde la terminal:
+        + $ heroku config:add APP_NAME="File Soluciones++"
+        + $ heroku config:add APP_ENV=production
+        + $ heroku config:add APP_KEY=base64:+K2OTyzMC5qJ2OceRZtbEkHnuW7hxN8itZwYqW+BVEQ=
+        + $ heroku config:add APP_DEBUG=true
+        + $ heroku config:add APP_URL=https://solucionespp-file.herokuapp.com/
+    4. Crear base de datos Postgre SQL desde la terminal:
+        + $ heroku addons:create heroku-postgresql:hobby-dev
+        + $ heroku pg:credentials:url
+        ##### Nota: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
+        ```txt
+        »   Warning: heroku update available from 7.52.0 to 7.56.1.
+        Connection information for default credential.
+        Connection info string:
+        "dbname=dcf4kqn86o0p64 host=ec2-34-197-105-186.compute-1.amazonaws.com port=5432 user=zsefyveumlxgjx password=b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56 sslmode=require"
+        Connection URL:
+        postgres://zsefyveumlxgjx:b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56@ec2-34-197-105-186.compute-1.amazonaws.com:5432/dcf4kqn86o0p64
+        ```       
+    5. Registrar variables de entorno de la base de datos desde la terminal:
+        + $ heroku config:add DB_CONNECTION=pgsql
+        + $ heroku config:add DB_HOST=ec2-34-197-105-186.compute-1.amazonaws.com
+        + $ heroku config:add DB_PORT=5432
+        + $ heroku config:add DB_DATABASE=dcf4kqn86o0p64
+        + $ heroku config:add DB_USERNAME=zsefyveumlxgjx
+        + $ heroku config:add DB_PASSWORD=b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56 sslmode=require
+    6. Ejecutar migraciones:
+        + $ heroku run bash
+        + ~ $ php artisan migrate
+            - Do you really wish to run this command? (yes/no) [no]: yes
+        + ~ $ exit
+    7. Salir de Heroku:
+        + $ heroku logout
+    8. Desconectar con repositorio Heroku:
+        + $ git remote rm heroku
+    9. Volver a conectar con repositorio GitHub:
+        + $ git remote add origin https://github.com/petrix12/file.git
+        + $ git push -u origin main
 
 
+## Actualizar repositorio en GitHub
+1. Ejecutar
+    + $ git add .
+    + $ git commit -m "Proyecto culminado V1"
+    + $ git push -u origin main
+
+
+
+```txt
+***
+```
 
 ***. Crear modelo File: $ php artisan make:model File -m
 ***. Crear controlador: $ php artisan make:controller FilesController -r
