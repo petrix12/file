@@ -1,5 +1,5 @@
 # Subir archivos a la red con Laravel y almacenar sus datos en MySQL
-##### **GitHub**: ***
+##### **GitHub**: https://github.com/petrix12/file.git
 
 ## Creación del proyecto:
 1. Crear proyecto: 
@@ -31,7 +31,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <title>Files | Soluciones++</title>
-            <link rel="shortcut icon" href="{{{ asset('favicon.ico') }}}">
+            <link rel="shortcut icon" href="favicon.ico">
 
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -189,9 +189,8 @@
         + $ heroku logout
     8. Desconectar con repositorio Heroku:
         + $ git remote rm heroku
-    9. Volver a conectar con repositorio GitHub:
-        + $ git remote add origin https://github.com/petrix12/file.git
-        + $ git push -u origin main
+##### Nota: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.
+
 
 
 ## Actualizar repositorio en GitHub
@@ -199,7 +198,6 @@
     + $ git add .
     + $ git commit -m "Proyecto culminado V1"
     + $ git push -u origin main
-
 
 
 ```txt
