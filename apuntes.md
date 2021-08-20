@@ -1,5 +1,5 @@
 # Subir archivos a la red con Laravel y almacenar sus datos en MySQL
-##### **GitHub**: https://github.com/petrix12/file.git
+**GitHub**: https://github.com/petrix12/file.git
 
 ## Creación del proyecto:
 1. Crear proyecto: 
@@ -12,7 +12,7 @@
     APP_URL=http://127.0.0.1:8000
     ≡
     ```
-    ##### **Nota**: en local deberemos levantar nuestro proyecto con el servidor de php artisan:
+    **Nota**: en local deberemos levantar nuestro proyecto con el servidor de php artisan:
     + $ php artisan serve
 5. Instalar Laravel Breeze:
    + $ composer require laravel/breeze --dev
@@ -31,7 +31,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <title>Files | Soluciones++</title>
-            <link rel="shortcut icon" href="favicon.ico">
+            <link rel="shortcut icon" href="{{{ asset('favicon.ico') }}}">
 
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -112,15 +112,20 @@
     </body>
     </html>  
     ```
-    ### Nota: si estas elaborando tu instructivo en formato Markdown puedes convertirlo a HTML en:
+    **Nota**: si estas elaborando tu instructivo en formato Markdown puedes convertirlo a HTML en:
     + https://dillinger.io
 4. Cambiar logo de la aplicación en **resources\views\components\application-logo.blade.php**:
     ```php
     <img src="https://blogger.googleusercontent.com/img/a/AVvXsEi6G3DYPhX_zU3sA_hSYxJ4DN_FW9jZOtVTnMPyGx4Po-hzAu2CiyY-LWhMIgNwud0uVrwVn0tBcEZvHqTtIDeIQA9zkYQguDXgB48jhNcpzgh-WIo6ZW9UW_PYGCrn4R2XInHdF1YxSP2kk1ldHlCTr_fDhzXpLnwNbhYJ5JMCcFfUFvW7x_NKJBPY6g=s314" alt="Logo Soluciones++">
     ```
-5. En caso de que querer personalizar las vistas relacionadas con la autenticación de usuarios, estas se encuentran ubicadas en **resources\views\auth**.
+5. Agregar CDN CSS de Bootstrap al **head** de la plantilla **resources\views\layouts\app.blade.php**:
+    ```php
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    ```
+6. En caso de que querer personalizar las vistas relacionadas con la autenticación de usuarios, estas se encuentran ubicadas en **resources\views\auth**.
 
-## Subir proyecto a GitHub
+## Subir proyecto a GitHub:
 1. Ir a la página de GitHub e iniciar sesión:
     + https://github.com
 2. Crear un nuevo repositorio y darle el nombre de **file**.
@@ -132,7 +137,7 @@
     + $ git remote add origin https://github.com/petrix12/file.git
     + $ git push -u origin main
 
-## Deploy en Heroku
+## Deploy en Heroku:
 1. Crear en la raíz del proyecto el archivo **Procfile** (sin extensión) para elegir un servidor apache en Heroku y también indicarle la ubicación del archivo **index.php**:
     ```txt
     web: vendor/bin/heroku-php-apache2 public/
@@ -141,7 +146,7 @@
     + https://dashboard.heroku.com/apps
 3. Crear un nuevo proyecto en **New** > **Create new app**:
     + Nombre: solucionespp-file
-    ##### Nota: Escoger un nombre de tu elección.
+    **Nota**: Escoger un nombre de tu elección.
 4. Ir a **Deploy** y dar clic en **GitHub**.
 5. Clic en el botón **Connect to GitHub** e ingresar las credenciales.
 6. Seleccionar el repositorio **petrix12/file** y presionar el botón **Connect**.
@@ -164,7 +169,7 @@
     4. Crear base de datos Postgre SQL desde la terminal:
         + $ heroku addons:create heroku-postgresql:hobby-dev
         + $ heroku pg:credentials:url
-        ##### Nota: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
+        **Nota**: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
         ```txt
         »   Warning: heroku update available from 7.52.0 to 7.56.1.
         Connection information for default credential.
@@ -189,32 +194,20 @@
         + $ heroku logout
     8. Desconectar con repositorio Heroku:
         + $ git remote rm heroku
-##### Nota: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.
+**Nota**: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.
 
-
-
-## Actualizar repositorio en GitHub
-1. Ejecutar
-    + $ git add .
-    + $ git commit -m "Proyecto culminado V1"
-    + $ git push -u origin main
-
-
-```txt
-***
-```
-
-***. Crear modelo File: $ php artisan make:model File -m
-***. Crear controlador: $ php artisan make:controller FilesController -r
-***. Solamente trabajaremos con los métodos index, create y store del controlador File.
-***. Agregar campos name, code_name y user_id a la migración de la tabla files:
+## Crear MVC (Modelo - Vista - Controlador) File:
+1. Crear modelo **File** junto a su migración:
+    + $ php artisan make:model File -m
+2. Agregar campos **name** y **code_name** y la clave foránea **user_id** a la migración de la tabla **files** (database\migrations\2021_08_19_213814_create_files_table.php):
+    ```php
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Nombre del archivo
-            $table->text('code_name'); // Nombre del archivo encriptado
-            $table->unsignedBigInteger('user_id');   // Relación con los usuarios
+            $table->string('name');                 // Nombre del archivo
+            $table->text('code_name');              // Nombre del archivo encriptado
+            $table->unsignedBigInteger('user_id');  // Relación con los usuarios (clave foránea)
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -222,28 +215,65 @@
             $table->timestamps();
         });
     }
-***. Indicamos los campos de asignación masiva en el modelo File
+    ```
+3. Indicar campos de asignación masiva en el modelo **File** (app\Models\File.php):
+    ```php
+    ≡
     protected $fillable = [
         'name',
         'code_name',
         'user_id'
     ];
-***. Configurar el archivo de variable de entorno .env con una bd.
-***. Ejecutar migración: $ php artisan migrate
-***. Adecuamos la vista dashboard a nuestro proyecto.
-    ***
-    ***
-***. Agregamos la ruta en routes\web.php
-    Route::post('/upload', [FilesController::class, 'store'])->name('user.files.store');
-***. Programar el método store del controlador File.
-    ***
-    ***
-***. Crear enlace simbólico de public a storage: $ php artisan storage:link
+    ≡
+    ```
+4. Crear controlador que administre el modelo **File** con todos los métodos para hacer un CRUD:
+    + $ php artisan make:controller FilesController -r
+    **Nota**: Solamente trabajaremos con los métodos **index**, **create** y **store**.
+5. Ejecutar migración: 
+    + $ php artisan migrate
+6. Agregar la ruta **upload** en **routes\web.php**:
+    ```php
+    Route::post('upload', [FilesController::class, 'store'])->name('user.files.store');
+    ```
+7. Modificar la vista **dashboard** (resources\views\dashboard.blade.php):
+    ```php
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
 
-Alertas
-=======
-URL: https://github.com/realrashid/sweet-alert
-***. Ejecutar: $ composer require realrashid/sweet-alert
+        <div class="py-12">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card">
+                        {{-- <div class="card-header">{{ __('Subir archivos') }}</div> --}}
+                        <p class="text-xl m-2 text-gray-600">Subir archivos</p>
+                        <form action="{{ route('user.files.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="files[]" multiple class="form-control" required>
+                            <button type="submit" class="my-4 btn btn-secondary float-right">
+                                Subir
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-app-layout>
+    ```
+8. Crear enlace simbólico de public a storage:
+    + $ php artisan storage:link
+9. Realizar commit MVC File:
+    + $ git add .
+
+
+
+## Integrar SweetAlert
+**URL**: https://github.com/realrashid/sweet-alert
+1. Ejecutar:
+    + $ composer require realrashid/sweet-alert
 ***. Agregar a config\app.php en providers
     ***
     'providers' => [
@@ -261,6 +291,60 @@ URL: https://github.com/realrashid/sweet-alert
 ***. Insertar en la sección content de resources\views\layouts\app.blade.php
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     Nota: si falla, reemplazar por: @include('sweetalert::alert')
+
+
+
+## Programar controlador FileController:
+1. Programar el método **store** del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    public function store(Request $request)
+    {
+        $max_size = (int)ini_get('upload_max_filesize') * 10240;
+        $files = $request->file('files');
+        $user_id = Auth::id();
+
+        if($request->hasFile('files')){
+            foreach($files as $file){
+                //$fileName = Str::slug($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                $fileName = encrypt($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                if(Storage::putFileAs('/public/' . $user_id . '/' , $file, $fileName)){
+                    File::create([
+                        'name' => $file->getClientOriginalName(),
+                        'code_name' => $fileName,
+                        'user_id' => $user_id
+                    ]);
+                }
+            }
+            Alert::success('¡Éxito!', 'Se ha subido el archivo');
+            return back();
+        }else{
+            Alert::error('¡Error!', 'Debes subir uno o más archivos');
+            return back();
+        }
+    }
+    ```
+
+
+ 
+
+## Actualizar repositorio en GitHub
+1. Ejecutar
+    + $ git add .
+    + $ git commit -m "Proyecto culminado V1"
+    + $ git push -u origin main
+
+
+```php
+***
+```
+
+
+
+
+
+
+
+
 
 Listar archivos
 ===============
