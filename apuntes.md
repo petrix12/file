@@ -320,6 +320,9 @@
     + $ git push -u origin main
 
 
+
+
+
 ## Crear MVC (Modelo - Vista - Controlador) File Parte II:
 1. Programar el método **store** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
@@ -392,9 +395,9 @@ Listar archivos
     ***
 ***. Seleccionar un modelo de tabla de bootstrap y para el diseño del la vista index.
     URL: https://getbootstrap.com/
-***. Insertar CDN de estilos Bootstrap en resources\views\layouts\app.blade.php
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+
 
 Limitar el acceso a los archivos
 ================================
