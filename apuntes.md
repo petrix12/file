@@ -196,7 +196,7 @@
         + $ git remote rm heroku
 **Nota**: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.
 
-## Crear MVC (Modelo - Vista - Controlador) File:
+## Crear MVC (Modelo - Vista - Controlador) File Parte I:
 1. Crear modelo **File** junto a su migración:
     + $ php artisan make:model File -m
 2. Agregar campos **name** y **code_name** y la clave foránea **user_id** a la migración de la tabla **files** (database\migrations\2021_08_19_213814_create_files_table.php):
@@ -267,34 +267,60 @@
     + $ php artisan storage:link
 9. Realizar commit MVC File:
     + $ git add .
-
-
+    + $ git commit -m "MVC File"
+    + $ git push -u origin main
 
 ## Integrar SweetAlert
 **URL**: https://github.com/realrashid/sweet-alert
 1. Ejecutar:
     + $ composer require realrashid/sweet-alert
-***. Agregar a config\app.php en providers
-    ***
+2. Agregar los servicios de **SweetAlert**  en la sección **providers** del archivo de configuración **config\app.php**:
+    ```php
     'providers' => [
         /*
         * Package Service Providers...
         */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        ***
+
+         /*
+         * Application Service Providers...
+         */
     ],
-    ***
-***. Agregar a config\app.php en aliases
-    'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-***. Agregar a la cabecera del controlador File:
+    ```
+3. Agregar el facade de **SweetAlert**  en la sección **aliases** del archivo de configuración **config\app.php**:
+    ```php
+    'aliases' => [
+        ≡
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+    ],
+    ```
+4. Importar el facade de **SweetAlert** en la cabecera del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
     use RealRashid\SweetAlert\Facades\Alert;
-***. Insertar en la sección content de resources\views\layouts\app.blade.php
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
-    Nota: si falla, reemplazar por: @include('sweetalert::alert')
+    ```
+5. Insertar el siguiente código en la sección **Page Content** de la plantilla **resources\views\layouts\app.blade.php**:
+    ```php
+    <!-- Page Content -->
+    <main>
+        {{ $slot }}
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+    </main>
+    ```
+    **Nota**: si falla, reemplazar por:
+    ```php
+    <!-- Page Content -->
+    <main>
+        {{ $slot }}
+        @include('sweetalert::alert')
+    </main>
+    ```
+9. Realizar commit Integración SweetAlert:
+    + $ git add .
+    + $ git commit -m "Integración SweetAlert"
+    + $ git push -u origin main
 
 
-
-## Programar controlador FileController:
+## Crear MVC (Modelo - Vista - Controlador) File Parte II:
 1. Programar el método **store** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
     public function store(Request $request)
