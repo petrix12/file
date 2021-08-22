@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('files', [FilesController::class, 'index'])->name('user.files.index');
 Route::post('upload', [FilesController::class, 'store'])->name('user.files.store');
+Route::get('files/{file}', [FilesController::class, 'show'])->name('user.files.show');
+Route::delete('delete/{file}', [FilesController::class, 'destroy'])->name('user.files.destroy');

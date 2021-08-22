@@ -123,7 +123,7 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     ```
-6. En caso de que querer personalizar las vistas relacionadas con la autenticación de usuarios, estas se encuentran ubicadas en **resources\views\auth**.
+8. En caso de que querer personalizar las vistas relacionadas con la autenticación de usuarios, estas se encuentran ubicadas en **resources\views\auth**.
 
 ## Subir proyecto a GitHub:
 1. Ir a la página de GitHub e iniciar sesión:
@@ -196,80 +196,6 @@
         + $ git remote rm heroku
 **Nota**: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.
 
-## Crear MVC (Modelo - Vista - Controlador) File Parte I:
-1. Crear modelo **File** junto a su migración:
-    + $ php artisan make:model File -m
-2. Agregar campos **name** y **code_name** y la clave foránea **user_id** a la migración de la tabla **files** (database\migrations\2021_08_19_213814_create_files_table.php):
-    ```php
-    public function up()
-    {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');                 // Nombre del archivo
-            $table->text('code_name');              // Nombre del archivo encriptado
-            $table->unsignedBigInteger('user_id');  // Relación con los usuarios (clave foránea)
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
-    ```
-3. Indicar campos de asignación masiva en el modelo **File** (app\Models\File.php):
-    ```php
-    ≡
-    protected $fillable = [
-        'name',
-        'code_name',
-        'user_id'
-    ];
-    ≡
-    ```
-4. Crear controlador que administre el modelo **File** con todos los métodos para hacer un CRUD:
-    + $ php artisan make:controller FilesController -r
-    **Nota**: Solamente trabajaremos con los métodos **index**, **create** y **store**.
-5. Ejecutar migración: 
-    + $ php artisan migrate
-6. Agregar la ruta **upload** en **routes\web.php**:
-    ```php
-    Route::post('upload', [FilesController::class, 'store'])->name('user.files.store');
-    ```
-7. Modificar la vista **dashboard** (resources\views\dashboard.blade.php):
-    ```php
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
-
-        <div class="py-12">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="card">
-                        {{-- <div class="card-header">{{ __('Subir archivos') }}</div> --}}
-                        <p class="text-xl m-2 text-gray-600">Subir archivos</p>
-                        <form action="{{ route('user.files.store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="file" name="files[]" multiple class="form-control" required>
-                            <button type="submit" class="my-4 btn btn-secondary float-right">
-                                Subir
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </x-app-layout>
-    ```
-8. Crear enlace simbólico de public a storage:
-    + $ php artisan storage:link
-9. Realizar commit MVC File:
-    + $ git add .
-    + $ git commit -m "MVC File"
-    + $ git push -u origin main
-
 ## Integrar SweetAlert
 **URL**: https://github.com/realrashid/sweet-alert
 1. Ejecutar:
@@ -319,12 +245,197 @@
     + $ git commit -m "Integración SweetAlert"
     + $ git push -u origin main
 
+## Crear MVC (Modelo - Vista - Controlador) File:
+1. Crear modelo **File** junto a su migración:
+    + $ php artisan make:model File -m
+2. Agregar campos **name** y **code_name** y la clave foránea **user_id** a la migración de la tabla **files** (database\migrations\2021_08_19_213814_create_files_table.php):
+    ```php
+    public function up()
+    {
+        Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');                 // Nombre del archivo
+            $table->text('code_name');              // Nombre del archivo encriptado
+            $table->unsignedBigInteger('user_id');  // Relación con los usuarios (clave foránea)
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+    ```
+3. Indicar campos de asignación masiva en el modelo **File** (app\Models\File.php):
+    ```php
+    ≡
+    protected $fillable = [
+        'name',
+        'code_name',
+        'user_id'
+    ];
+    ≡
+    ```
+4. Crear controlador que administre el modelo **File** con todos los métodos para hacer un CRUD:
+    + $ php artisan make:controller FilesController -r
+    **Nota**: Solamente trabajaremos con los métodos **index**, **create** y **store**.
+5. Ejecutar migración: 
+    + $ php artisan migrate
+6. Importar el controlador **FilesController** en el archivo de rutas **routes\web.php**:
+    ```php
+    use App\Http\Controllers\FilesController;
+    ```
+7. Agregar las rutas para el CRUD File en **routes\web.php**:
+    ```php
+    Route::get('files', [FilesController::class, 'index'])->name('user.files.index');
+    Route::post('upload', [FilesController::class, 'store'])->name('user.files.store');
+    Route::get('files/{file}', [FilesController::class, 'show'])->name('user.files.show');
+    Route::delete('delete/{file}', [FilesController::class, 'destroy'])->name('user.files.destroy');
+    ```
+8. Crear menú **Mis archivos** en la plantilla de navegación **resources\views\layouts\navigation.blade.php**:
+    ```php
+    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+        <!-- Primary Navigation Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    ≡
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
 
+                    <!-- Mis archivos Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('user.files.index')" :active="request()->routeIs('user.files.index')">
+                            Mis archivos
+                        </x-nav-link>
+                    </div>
+                </div>
+                ≡
+            </div>
+        </div>
 
+        <!-- Responsive Navigation Menu -->
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+            </div>
 
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('user.files.index')" :active="request()->routeIs('user.files.index')">
+                    Mis archivos
+                </x-responsive-nav-link>
+            </div>
+            ≡
+        </div>
+    </nav>
+    ```
+9.  Modificar la vista **dashboard** (resources\views\dashboard.blade.php):
+    ```php
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
 
-## Crear MVC (Modelo - Vista - Controlador) File Parte II:
-1. Programar el método **store** del controlador **app\Http\Controllers\FilesController.php**:
+        <div class="py-12">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card">
+                        {{-- <div class="card-header">{{ __('Subir archivos') }}</div> --}}
+                        <p class="text-xl m-2 text-gray-600">Subir archivos</p>
+                        <form action="{{ route('user.files.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="files[]" multiple class="form-control" required>
+                            <button type="submit" class="my-4 btn btn-secondary float-right">
+                                Subir
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-app-layout>
+    ```
+10. Crear enlace simbólico de public a storage:
+    + $ php artisan storage:link
+11. Importar el modelo **File** y los facades **Auth** y **Storage** en el controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    use App\Models\File;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Storage;
+    ```
+12. Programar el método **index** del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    public function index()
+    {
+        $files = File::whereUserId(Auth::id())->latest()->get();
+        return view('index', compact('files'));
+    }
+    ```
+13. Crear vista para el método **index** (resources\views\index.blade.php) del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
+
+        <div class="py-12">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="card">
+                        <h1 class="col-md-8 text-xl text-gray-600 m-2"><strong>Lista de archivos</strong></h1>
+                        @if ($files->count())
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre del archivo</th>
+                                        <th scope="col">Ruta</th>
+                                        <th scope="col">Ver</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($files as $file)
+                                    <tr>
+                                        <th scope="row">{{ $file->id }}</th>
+                                        <td>{{ $file->name }}</td>
+                                        <td>{{ public_path() }}s</td>
+                                        <td>
+                                            <a href="{{ route('user.files.show',$file->code_name) }}" class="btn btn-sm btn-outline-secondary" target="_blank">Ver</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('user.files.destroy',$file->code_name) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p class="m-2">{{ auth()->user()->name }} no tienes archivos almacenados</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-app-layout>
+    ```
+    **Nota**: Puedes seleccionar un modelo de tabla de bootstrap para el diseño del la vista index en:
+    URL: https://getbootstrap.com
+14. Programar el método **store** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
     public function store(Request $request)
     {
@@ -352,71 +463,26 @@
         }
     }
     ```
-
-
- 
-
-## Actualizar repositorio en GitHub
-1. Ejecutar
+15. Programar el método **show** del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    ***
+    ```
+16. Programar el método **destroy** del controlador **app\Http\Controllers\FilesController.php**:
+    ```php
+    ***
+    ```
+17. Realizar commit MVC File:
     + $ git add .
-    + $ git commit -m "Proyecto culminado V1"
+    + $ git commit -m "MVC File"
     + $ git push -u origin main
 
 
-```php
-***
-```
-
-
-
-
-
-
-
-
-
-Listar archivos
-===============
-***. Crear otro menú de navegación en resources\views\navigation-menu.blade.php
-    ***
-    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-        <x-jet-nav-link href="{{ route('user.files.index') }}" :active="request()->routeIs('user.files.index')">
-            {{ __('Mis archivos') }}
-        </x-jet-nav-link>
-    </div>
-    ***
-***. Agregar ruta en routes\web.php
-    Route::get('/files', [Controller::class, 'index'])->name('user.files.index');
-***. Crear vista para el método index del controlador File: resources\views\index.blade.php
-    ***
-    ***
-***. Programar el método index del controlador File.
-    ***
-    ***
-***. Seleccionar un modelo de tabla de bootstrap y para el diseño del la vista index.
-    URL: https://getbootstrap.com/
-
-
-
-
-Limitar el acceso a los archivos
-================================
-***. Agregar ruta a routes\web.php
-    Route::get('/files/{file}', [FilesController::class, 'store'])->name('user.files.show');
-***. Programar el método show del controlador File.
-    ***
-    ***
 OJO: Solventar problema:
 Forbidden
 You don't have permission to access this resource.
 
 Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/7.4.15 Server at file.test Port 80
 
-Eliminar archivo
-================
-***. Agregar ruta a routes\web.php
-    Route::delete('/delet-file/{file}', [FilesController::class, 'destroy'])->name('user.files.destroy');
-***. Programar el método destroy del controlador File.
-    ***
-    *** 
-
+## Configurar GitHub
+    + $ git config --global user.name "Pedro Bazó"
+    + $ git config --global user.email bazo.pedro@gmail.com

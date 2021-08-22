@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
@@ -14,7 +17,8 @@ class FilesController extends Controller
      */
     public function index()
     {
-        //
+        $files = File::whereUserId(Auth::id())->latest()->get();
+        return view('index', compact('files'));
     }
 
     /**
@@ -35,7 +39,28 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $max_size = (int)ini_get('upload_max_filesize') * 10240;
+        $files = $request->file('files');
+        $user_id = Auth::id();
+
+        if($request->hasFile('files')){
+            foreach($files as $file){
+                //$fileName = Str::slug($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                $fileName = encrypt($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                if(Storage::putFileAs('/public/' . $user_id . '/' , $file, $fileName)){
+                    File::create([
+                        'name' => $file->getClientOriginalName(),
+                        'code_name' => $fileName,
+                        'user_id' => $user_id
+                    ]);
+                }
+            }
+            Alert::success('¡Éxito!', 'Se ha subido el archivo');
+            return back();
+        }else{
+            Alert::error('¡Error!', 'Debes subir uno o más archivos');
+            return back();
+        }
     }
 
     /**
@@ -46,7 +71,18 @@ class FilesController extends Controller
      */
     public function show($id)
     {
-        //
+        $file = File::whereCodeName($id)->firstOrFail();
+        $user_id = Auth::id();
+        if($file->user_id == $user_id){
+            return redirect(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
+            // return redirect('/storage'.'/'.$user_id.'/'.$file->name);
+        } else {
+            Alert::error('¡Error!', 'No tiene permisos para ver este archivo');
+            return back();
+
+            // También se puede colocar
+            // abort(403);
+        }
     }
 
     /**
@@ -78,8 +114,18 @@ class FilesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $file = File::whereCodeName($id)->firstOrFail();
+        
+        // Borra el archivo del storage o almacenamiento
+        $archivo = storage_path().'/app/public/'.Auth::id().'/'.$file->code_name;
+        unlink($archivo);
+
+        // Borra el registro de la bd
+        $file->delete();
+
+        Alert::info('Atención!', 'Se ha eliminado el archivo');
+        return back();
     }
 }
