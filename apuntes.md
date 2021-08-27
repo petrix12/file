@@ -154,6 +154,8 @@
 8. Presionar el botón **Deploy Branch**.
 9. Descargar e instalar Heroku CLI:
     + https://devcenter.heroku.com/articles/heroku-cli
+    **Nota**: si no ejecuta desde VSC ejecutar:
+    + $ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 10. Ir a la terminal del proyecto y ejecutar:
     1. Iniciar sesión en Heroku:
         + $ heroku login
@@ -370,6 +372,7 @@
     use App\Models\File;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
     ```
 12. Programar el método **index** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
@@ -384,7 +387,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
+                Mis archivos
             </h2>
         </x-slot>
 
@@ -465,24 +468,61 @@
     ```
 15. Programar el método **show** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
-    ***
+    public function show($id)
+    {
+        $file = File::whereCodeName($id)->firstOrFail();
+        $user_id = Auth::id();
+        if($file->user_id == $user_id){
+            //return redirect(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
+            return response()->file(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
+        } else {
+            Alert::error('¡Error!', 'No tiene permisos para ver este archivo');
+            return back();
+
+            // También se puede colocar
+            // abort(403);
+        }
+    }
     ```
 16. Programar el método **destroy** del controlador **app\Http\Controllers\FilesController.php**:
     ```php
-    ***
+    public function destroy(Request $request, $id)
+    {
+        $file = File::whereCodeName($id)->firstOrFail();
+        
+        // Borra el archivo del storage o almacenamiento
+        $archivo = storage_path().'/app/public/'.Auth::id().'/'.$file->code_name;
+        unlink($archivo);
+
+        // Borra el registro de la bd
+        $file->delete();
+
+        Alert::info('Atención!', 'Se ha eliminado el archivo');
+        return back();
+    }
     ```
 17. Realizar commit MVC File:
     + $ git add .
     + $ git commit -m "MVC File"
     + $ git push -u origin main
 
+## Actualizar instructivo:
+1. Copiar todo el contenido de este archivo Markdown (**apuntes.md**).
+2. Ir a https://dillinger.io y convertir nuestro archivo de **Markdown** a **HTML**.
+3. Exportar como **Styled HTML** y guardar este archivo como **public\instructivo.html** reemplazando así al existente.
 
-OJO: Solventar problema:
-Forbidden
-You don't have permission to access this resource.
-
-Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/7.4.15 Server at file.test Port 80
-
-## Configurar GitHub
-    + $ git config --global user.name "Pedro Bazó"
-    + $ git config --global user.email bazo.pedro@gmail.com
+## Actualizar proyecto en Heroku:
+1. Realizar commit final:
+    + $ git add .
+    + $ git commit -m "Proyecto terminado V1"
+    + $ git push -u origin main
+2. Abrir nueva terminal para trabajar en heroku
+    1. $ heroku login
+    2. $ git remote add heroku git.heroku.com/solucionespp-file.git
+    3. $ heroku git:remote -a solucionespp-file
+    4. $ heroku run bash
+    5. ~ $ php artisan storage:link
+    6. ~ $ php artisan migrate
+          - Do you really wish to run this command? (yes/no) [no]: yes
+    7. ~ $ exit
+    8. $ heroku logout

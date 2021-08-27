@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FilesController extends Controller
 {
@@ -40,13 +41,14 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $max_size = (int)ini_get('upload_max_filesize') * 10240;
+
         $files = $request->file('files');
         $user_id = Auth::id();
 
         if($request->hasFile('files')){
             foreach($files as $file){
-                //$fileName = Str::slug($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
-                $fileName = encrypt($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                $fileName = Str::slug($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+                //$fileName = encrypt($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
                 if(Storage::putFileAs('/public/' . $user_id . '/' , $file, $fileName)){
                     File::create([
                         'name' => $file->getClientOriginalName(),
@@ -74,8 +76,8 @@ class FilesController extends Controller
         $file = File::whereCodeName($id)->firstOrFail();
         $user_id = Auth::id();
         if($file->user_id == $user_id){
-            return redirect(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
-            // return redirect('/storage'.'/'.$user_id.'/'.$file->name);
+            //return redirect(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
+            return response()->file(storage_path().'/app/public/'.$user_id.'/'.$file->code_name);
         } else {
             Alert::error('¡Error!', 'No tiene permisos para ver este archivo');
             return back();

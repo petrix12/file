@@ -41,7 +41,7 @@ APP_URL=http://127.0.0.1:8000
         &lt;link rel="shortcut icon" href="{{{ asset('favicon.ico') }}}"&gt;
 
         &lt;!-- Fonts --&gt;
-        &lt;link href="https://fonts.googleapis.com/css2?family=Nunito:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbccdcd3cffb8f8b8b">[email&#160;protected]</a>;600;700&amp;display=swap" rel="stylesheet"&gt;
+        &lt;link href="https://fonts.googleapis.com/css2?family=Nunito:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0473636c7044303434">[email&#160;protected]</a>;600;700&amp;display=swap" rel="stylesheet"&gt;
 
         &lt;!-- Styles --&gt;
         &lt;style&gt;
@@ -127,7 +127,7 @@ APP_URL=http://127.0.0.1:8000
 </code></pre>
 </li>
 <li class="has-line-data" data-line-start="120" data-line-end="125">Agregar CDN CSS de Bootstrap al <strong>head</strong> de la plantilla <strong>resources\views\layouts\app.blade.php</strong>:<pre><code class="has-line-data" data-line-start="122" data-line-end="125" class="language-php">&lt;!-- CSS only --&gt;
-&lt;link href=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f2909d9d868186809382b2c7dcc3dcc2">[email&#160;protected]</a>/dist/css/bootstrap.min.css"</span> rel=<span class="hljs-string">"stylesheet"</span> integrity=<span class="hljs-string">"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"</span> crossorigin=<span class="hljs-string">"anonymous"</span>&gt;
+&lt;link href=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b4944445f585f594a5b6b1e051a051b">[email&#160;protected]</a>/dist/css/bootstrap.min.css"</span> rel=<span class="hljs-string">"stylesheet"</span> integrity=<span class="hljs-string">"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"</span> crossorigin=<span class="hljs-string">"anonymous"</span>&gt;
 </code></pre>
 </li>
 <li class="has-line-data" data-line-start="125" data-line-end="127">En caso de que querer personalizar las vistas relacionadas con la autenticación de usuarios, estas se encuentran ubicadas en <strong>resources\views\auth</strong>.</li>
@@ -172,91 +172,93 @@ APP_URL=http://127.0.0.1:8000
 <li class="has-line-data" data-line-start="151" data-line-end="152">Seleccionar el repositorio <strong>petrix12/file</strong> y presionar el botón <strong>Connect</strong>.</li>
 <li class="has-line-data" data-line-start="152" data-line-end="153">Para tener siempre la ultima actualización de <strong>GitHub</strong> de nuestro proyecto presionar el botón <strong>Enable Automatic Deploys</strong>.</li>
 <li class="has-line-data" data-line-start="153" data-line-end="154">Presionar el botón <strong>Deploy Branch</strong>.</li>
-<li class="has-line-data" data-line-start="154" data-line-end="156">Descargar e instalar Heroku CLI:
+<li class="has-line-data" data-line-start="154" data-line-end="158">Descargar e instalar Heroku CLI:
 <ul>
-<li class="has-line-data" data-line-start="155" data-line-end="156"><a href="https://devcenter.heroku.com/articles/heroku-cli">https://devcenter.heroku.com/articles/heroku-cli</a></li>
+<li class="has-line-data" data-line-start="155" data-line-end="157"><a href="https://devcenter.heroku.com/articles/heroku-cli">https://devcenter.heroku.com/articles/heroku-cli</a><br>
+<strong>Nota</strong>: si no ejecuta desde VSC ejecutar:</li>
+<li class="has-line-data" data-line-start="157" data-line-end="158">$ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="156" data-line-end="198">Ir a la terminal del proyecto y ejecutar:
+<li class="has-line-data" data-line-start="158" data-line-end="200">Ir a la terminal del proyecto y ejecutar:
 <ol>
-<li class="has-line-data" data-line-start="157" data-line-end="159">Iniciar sesión en Heroku:
+<li class="has-line-data" data-line-start="159" data-line-end="161">Iniciar sesión en Heroku:
 <ul>
-<li class="has-line-data" data-line-start="158" data-line-end="159">$ heroku login</li>
+<li class="has-line-data" data-line-start="160" data-line-end="161">$ heroku login</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="159" data-line-end="162">Víncular nuestro proyecto <strong>file</strong> con la aplicación de Heroku <strong>solucionespp-file</strong>:
+<li class="has-line-data" data-line-start="161" data-line-end="164">Víncular nuestro proyecto <strong>file</strong> con la aplicación de Heroku <strong>solucionespp-file</strong>:
 <ul>
-<li class="has-line-data" data-line-start="160" data-line-end="161">$ git remote add heroku <a href="https://git.heroku.com/solucionespp-file.git">git.heroku.com/solucionespp-file.git</a></li>
-<li class="has-line-data" data-line-start="161" data-line-end="162">$ heroku git:remote -a solucionespp-file</li>
+<li class="has-line-data" data-line-start="162" data-line-end="163">$ git remote add heroku <a href="https://git.heroku.com/solucionespp-file.git">git.heroku.com/solucionespp-file.git</a></li>
+<li class="has-line-data" data-line-start="163" data-line-end="164">$ heroku git:remote -a solucionespp-file</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="162" data-line-end="168">Registrar variables de entorno de la aplicación desde la terminal:
+<li class="has-line-data" data-line-start="164" data-line-end="170">Registrar variables de entorno de la aplicación desde la terminal:
 <ul>
-<li class="has-line-data" data-line-start="163" data-line-end="164">$ heroku config:add APP_NAME=“File Soluciones++”</li>
-<li class="has-line-data" data-line-start="164" data-line-end="165">$ heroku config:add APP_ENV=production</li>
-<li class="has-line-data" data-line-start="165" data-line-end="166">$ heroku config:add APP_KEY=base64:+K2OTyzMC5qJ2OceRZtbEkHnuW7hxN8itZwYqW+BVEQ=</li>
-<li class="has-line-data" data-line-start="166" data-line-end="167">$ heroku config:add APP_DEBUG=true</li>
-<li class="has-line-data" data-line-start="167" data-line-end="168">$ heroku config:add APP_URL=https://solucionespp-file.herokuapp.com/</li>
+<li class="has-line-data" data-line-start="165" data-line-end="166">$ heroku config:add APP_NAME=“File Soluciones++”</li>
+<li class="has-line-data" data-line-start="166" data-line-end="167">$ heroku config:add APP_ENV=production</li>
+<li class="has-line-data" data-line-start="167" data-line-end="168">$ heroku config:add APP_KEY=base64:+K2OTyzMC5qJ2OceRZtbEkHnuW7hxN8itZwYqW+BVEQ=</li>
+<li class="has-line-data" data-line-start="168" data-line-end="169">$ heroku config:add APP_DEBUG=true</li>
+<li class="has-line-data" data-line-start="169" data-line-end="170">$ heroku config:add APP_URL=https://solucionespp-file.herokuapp.com/</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="168" data-line-end="180">Crear base de datos Postgre SQL desde la terminal:
+<li class="has-line-data" data-line-start="170" data-line-end="182">Crear base de datos Postgre SQL desde la terminal:
 <ul>
-<li class="has-line-data" data-line-start="169" data-line-end="170">$ heroku addons:create heroku-postgresql:hobby-dev</li>
-<li class="has-line-data" data-line-start="170" data-line-end="172">$ heroku pg:credentials:url<br>
+<li class="has-line-data" data-line-start="171" data-line-end="172">$ heroku addons:create heroku-postgresql:hobby-dev</li>
+<li class="has-line-data" data-line-start="172" data-line-end="174">$ heroku pg:credentials:url<br>
 <strong>Nota</strong>: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:</li>
 </ul>
-<pre><code class="has-line-data" data-line-start="173" data-line-end="180" class="language-txt">»   Warning: heroku update available from 7.52.0 to 7.56.1.
+<pre><code class="has-line-data" data-line-start="175" data-line-end="182" class="language-txt">»   Warning: heroku update available from 7.52.0 to 7.56.1.
 Connection information for default credential.
 Connection info string:
 &quot;dbname=dcf4kqn86o0p64 host=ec2-34-197-105-186.compute-1.amazonaws.com port=5432 user=zsefyveumlxgjx password=b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56 sslmode=require&quot;
 Connection URL:
-postgres://zsefyveumlxgjx:b<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3d086d6d5d0db828685dbdbd3858080d7d185d3d3d3dbd081d580d38181858586d481d6db86d786d3d3d3d1d5d5d781d6d5d5d386d48586d481d480d587d6d5a3">[email&#160;protected]</a>ec2-34-197-105-186.compute-1.amazonaws.com:5432/dcf4kqn86o0p64
+postgres://zsefyveumlxgjx:b<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d0e58080b0e055c585b05050d5b5e5e090f5b0d0d0d050e5f0b5e0d5f5f5b5b580a5f08055809580d0d0d0f0b0b095f080b0b0d580a5b580a5f0a5e0b59080b7d">[email&#160;protected]</a>ec2-34-197-105-186.compute-1.amazonaws.com:5432/dcf4kqn86o0p64
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="180" data-line-end="187">Registrar variables de entorno de la base de datos desde la terminal:
+<li class="has-line-data" data-line-start="182" data-line-end="189">Registrar variables de entorno de la base de datos desde la terminal:
 <ul>
-<li class="has-line-data" data-line-start="181" data-line-end="182">$ heroku config:add DB_CONNECTION=pgsql</li>
-<li class="has-line-data" data-line-start="182" data-line-end="183">$ heroku config:add DB_HOST=<a href="http://ec2-34-197-105-186.compute-1.amazonaws.com">ec2-34-197-105-186.compute-1.amazonaws.com</a></li>
-<li class="has-line-data" data-line-start="183" data-line-end="184">$ heroku config:add DB_PORT=5432</li>
-<li class="has-line-data" data-line-start="184" data-line-end="185">$ heroku config:add DB_DATABASE=dcf4kqn86o0p64</li>
-<li class="has-line-data" data-line-start="185" data-line-end="186">$ heroku config:add DB_USERNAME=zsefyveumlxgjx</li>
-<li class="has-line-data" data-line-start="186" data-line-end="187">$ heroku config:add DB_PASSWORD=b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56 sslmode=require</li>
+<li class="has-line-data" data-line-start="183" data-line-end="184">$ heroku config:add DB_CONNECTION=pgsql</li>
+<li class="has-line-data" data-line-start="184" data-line-end="185">$ heroku config:add DB_HOST=<a href="http://ec2-34-197-105-186.compute-1.amazonaws.com">ec2-34-197-105-186.compute-1.amazonaws.com</a></li>
+<li class="has-line-data" data-line-start="185" data-line-end="186">$ heroku config:add DB_PORT=5432</li>
+<li class="has-line-data" data-line-start="186" data-line-end="187">$ heroku config:add DB_DATABASE=dcf4kqn86o0p64</li>
+<li class="has-line-data" data-line-start="187" data-line-end="188">$ heroku config:add DB_USERNAME=zsefyveumlxgjx</li>
+<li class="has-line-data" data-line-start="188" data-line-end="189">$ heroku config:add DB_PASSWORD=b3e5638aef880fcc42f00083b6c0bbffe7b58e4e0002664b5660e7fe7b7c6d56 sslmode=require</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="187" data-line-end="192">Ejecutar migraciones:
+<li class="has-line-data" data-line-start="189" data-line-end="194">Ejecutar migraciones:
 <ul>
-<li class="has-line-data" data-line-start="188" data-line-end="189">$ heroku run bash</li>
-<li class="has-line-data" data-line-start="189" data-line-end="191">~ $ php artisan migrate
+<li class="has-line-data" data-line-start="190" data-line-end="191">$ heroku run bash</li>
+<li class="has-line-data" data-line-start="191" data-line-end="193">~ $ php artisan migrate
 <ul>
-<li class="has-line-data" data-line-start="190" data-line-end="191">Do you really wish to run this command? (yes/no) [no]: yes</li>
+<li class="has-line-data" data-line-start="192" data-line-end="193">Do you really wish to run this command? (yes/no) [no]: yes</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="191" data-line-end="192">~ $ exit</li>
+<li class="has-line-data" data-line-start="193" data-line-end="194">~ $ exit</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="192" data-line-end="194">Salir de Heroku:
+<li class="has-line-data" data-line-start="194" data-line-end="196">Salir de Heroku:
 <ul>
-<li class="has-line-data" data-line-start="193" data-line-end="194">$ heroku logout</li>
+<li class="has-line-data" data-line-start="195" data-line-end="196">$ heroku logout</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="194" data-line-end="198">Desconectar con repositorio Heroku:
+<li class="has-line-data" data-line-start="196" data-line-end="200">Desconectar con repositorio Heroku:
 <ul>
-<li class="has-line-data" data-line-start="195" data-line-end="198">$ git remote rm heroku<br>
+<li class="has-line-data" data-line-start="197" data-line-end="200">$ git remote rm heroku<br>
 <strong>Nota</strong>: La carga de nuestro proyecto en el servidor de Heroku puede tardar minutos, e incluso horas.</li>
 </ul>
 </li>
 </ol>
 </li>
 </ol>
-<h2 class="code-line" data-line-start=198 data-line-end=199><a id="Integrar_SweetAlert_198"></a>Integrar SweetAlert</h2>
-<p class="has-line-data" data-line-start="199" data-line-end="200"><strong>URL</strong>: <a href="https://github.com/realrashid/sweet-alert">https://github.com/realrashid/sweet-alert</a></p>
+<h2 class="code-line" data-line-start=200 data-line-end=201><a id="Integrar_SweetAlert_200"></a>Integrar SweetAlert</h2>
+<p class="has-line-data" data-line-start="201" data-line-end="202"><strong>URL</strong>: <a href="https://github.com/realrashid/sweet-alert">https://github.com/realrashid/sweet-alert</a></p>
 <ol>
-<li class="has-line-data" data-line-start="200" data-line-end="202">Ejecutar:
+<li class="has-line-data" data-line-start="202" data-line-end="204">Ejecutar:
 <ul>
-<li class="has-line-data" data-line-start="201" data-line-end="202">$ composer require realrashid/sweet-alert</li>
+<li class="has-line-data" data-line-start="203" data-line-end="204">$ composer require realrashid/sweet-alert</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="202" data-line-end="215">Agregar los servicios de <strong>SweetAlert</strong> en la sección <strong>providers</strong> del archivo de configuración <strong>config\app.php</strong>:<pre><code class="has-line-data" data-line-start="204" data-line-end="215" class="language-php"><span class="hljs-string">'providers'</span> =&gt; [
+<li class="has-line-data" data-line-start="204" data-line-end="217">Agregar los servicios de <strong>SweetAlert</strong> en la sección <strong>providers</strong> del archivo de configuración <strong>config\app.php</strong>:<pre><code class="has-line-data" data-line-start="206" data-line-end="217" class="language-php"><span class="hljs-string">'providers'</span> =&gt; [
     <span class="hljs-comment">/*
     * Package Service Providers...
     */</span>
@@ -268,44 +270,44 @@ postgres://zsefyveumlxgjx:b<a href="/cdn-cgi/l/email-protection" class="__cf_ema
 ],
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="215" data-line-end="222">Agregar el facade de <strong>SweetAlert</strong> en la sección <strong>aliases</strong> del archivo de configuración <strong>config\app.php</strong>:<pre><code class="has-line-data" data-line-start="217" data-line-end="222" class="language-php"><span class="hljs-string">'aliases'</span> =&gt; [
+<li class="has-line-data" data-line-start="217" data-line-end="224">Agregar el facade de <strong>SweetAlert</strong> en la sección <strong>aliases</strong> del archivo de configuración <strong>config\app.php</strong>:<pre><code class="has-line-data" data-line-start="219" data-line-end="224" class="language-php"><span class="hljs-string">'aliases'</span> =&gt; [
     ≡
     <span class="hljs-string">'Alert'</span> =&gt; RealRashid\SweetAlert\Facades\Alert::class,
 ],
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="222" data-line-end="226">Importar el facade de <strong>SweetAlert</strong> en la cabecera del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="224" data-line-end="226" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">RealRashid</span>\<span class="hljs-title">SweetAlert</span>\<span class="hljs-title">Facades</span>\<span class="hljs-title">Alert</span>;
+<li class="has-line-data" data-line-start="224" data-line-end="228">Importar el facade de <strong>SweetAlert</strong> en la cabecera del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="226" data-line-end="228" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">RealRashid</span>\<span class="hljs-title">SweetAlert</span>\<span class="hljs-title">Facades</span>\<span class="hljs-title">Alert</span>;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="226" data-line-end="242">Insertar el siguiente código en la sección <strong>Page Content</strong> de la plantilla <strong>resources\views\layouts\app.blade.php</strong>:<pre><code class="has-line-data" data-line-start="228" data-line-end="234" class="language-php">&lt;!-- Page Content --&gt;
+<li class="has-line-data" data-line-start="228" data-line-end="244">Insertar el siguiente código en la sección <strong>Page Content</strong> de la plantilla <strong>resources\views\layouts\app.blade.php</strong>:<pre><code class="has-line-data" data-line-start="230" data-line-end="236" class="language-php">&lt;!-- Page Content --&gt;
 &lt;main&gt;
     {{ <span class="hljs-variable">$slot</span> }}
-    @<span class="hljs-keyword">include</span>(<span class="hljs-string">'sweetalert::alert'</span>, [<span class="hljs-string">'cdn'</span> =&gt; <span class="hljs-string">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="532024363627323f36212761136a">[email&#160;protected]</a>"</span>])
+    @<span class="hljs-keyword">include</span>(<span class="hljs-string">'sweetalert::alert'</span>, [<span class="hljs-string">'cdn'</span> =&gt; <span class="hljs-string">"https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a494d5f5f4e5b565f484e087a03">[email&#160;protected]</a>"</span>])
 &lt;/main&gt;
 </code></pre>
-<strong>Nota</strong>: si falla, reemplazar por:<pre><code class="has-line-data" data-line-start="236" data-line-end="242" class="language-php">&lt;!-- Page Content --&gt;
+<strong>Nota</strong>: si falla, reemplazar por:<pre><code class="has-line-data" data-line-start="238" data-line-end="244" class="language-php">&lt;!-- Page Content --&gt;
 &lt;main&gt;
     {{ <span class="hljs-variable">$slot</span> }}
     @<span class="hljs-keyword">include</span>(<span class="hljs-string">'sweetalert::alert'</span>)
 &lt;/main&gt;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="242" data-line-end="247">Realizar commit Integración SweetAlert:
+<li class="has-line-data" data-line-start="244" data-line-end="249">Realizar commit Integración SweetAlert:
 <ul>
-<li class="has-line-data" data-line-start="243" data-line-end="244">$ git add .</li>
-<li class="has-line-data" data-line-start="244" data-line-end="245">$ git commit -m “Integración SweetAlert”</li>
-<li class="has-line-data" data-line-start="245" data-line-end="247">$ git push -u origin main</li>
+<li class="has-line-data" data-line-start="245" data-line-end="246">$ git add .</li>
+<li class="has-line-data" data-line-start="246" data-line-end="247">$ git commit -m “Integración SweetAlert”</li>
+<li class="has-line-data" data-line-start="247" data-line-end="249">$ git push -u origin main</li>
 </ul>
 </li>
 </ol>
-<h2 class="code-line" data-line-start=247 data-line-end=248><a id="Crear_MVC_Modelo__Vista__Controlador_File_247"></a>Crear MVC (Modelo - Vista - Controlador) File:</h2>
+<h2 class="code-line" data-line-start=249 data-line-end=250><a id="Crear_MVC_Modelo__Vista__Controlador_File_249"></a>Crear MVC (Modelo - Vista - Controlador) File:</h2>
 <ol>
-<li class="has-line-data" data-line-start="248" data-line-end="250">Crear modelo <strong>File</strong> junto a su migración:
+<li class="has-line-data" data-line-start="250" data-line-end="252">Crear modelo <strong>File</strong> junto a su migración:
 <ul>
-<li class="has-line-data" data-line-start="249" data-line-end="250">$ php artisan make:model File -m</li>
+<li class="has-line-data" data-line-start="251" data-line-end="252">$ php artisan make:model File -m</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="250" data-line-end="267">Agregar campos <strong>name</strong> y <strong>code_name</strong> y la clave foránea <strong>user_id</strong> a la migración de la tabla <strong>files</strong> (database\migrations\2021_08_19_213814_create_files_table.php):<pre><code class="has-line-data" data-line-start="252" data-line-end="267" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">up</span><span class="hljs-params">()</span>
+<li class="has-line-data" data-line-start="252" data-line-end="269">Agregar campos <strong>name</strong> y <strong>code_name</strong> y la clave foránea <strong>user_id</strong> a la migración de la tabla <strong>files</strong> (database\migrations\2021_08_19_213814_create_files_table.php):<pre><code class="has-line-data" data-line-start="254" data-line-end="269" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">up</span><span class="hljs-params">()</span>
 </span>{
     Schema::create(<span class="hljs-string">'files'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(Blueprint <span class="hljs-variable">$table</span>)</span> </span>{
         <span class="hljs-variable">$table</span>-&gt;id();
@@ -321,7 +323,7 @@ postgres://zsefyveumlxgjx:b<a href="/cdn-cgi/l/email-protection" class="__cf_ema
 }
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="267" data-line-end="277">Indicar campos de asignación masiva en el modelo <strong>File</strong> (app\Models\File.php):<pre><code class="has-line-data" data-line-start="269" data-line-end="277" class="language-php">≡
+<li class="has-line-data" data-line-start="269" data-line-end="279">Indicar campos de asignación masiva en el modelo <strong>File</strong> (app\Models\File.php):<pre><code class="has-line-data" data-line-start="271" data-line-end="279" class="language-php">≡
 <span class="hljs-keyword">protected</span> <span class="hljs-variable">$fillable</span> = [
     <span class="hljs-string">'name'</span>,
     <span class="hljs-string">'code_name'</span>,
@@ -330,27 +332,27 @@ postgres://zsefyveumlxgjx:b<a href="/cdn-cgi/l/email-protection" class="__cf_ema
 ≡
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="277" data-line-end="280">Crear controlador que administre el modelo <strong>File</strong> con todos los métodos para hacer un CRUD:
+<li class="has-line-data" data-line-start="279" data-line-end="282">Crear controlador que administre el modelo <strong>File</strong> con todos los métodos para hacer un CRUD:
 <ul>
-<li class="has-line-data" data-line-start="278" data-line-end="280">$ php artisan make:controller FilesController -r<br>
+<li class="has-line-data" data-line-start="280" data-line-end="282">$ php artisan make:controller FilesController -r<br>
 <strong>Nota</strong>: Solamente trabajaremos con los métodos <strong>index</strong>, <strong>create</strong> y <strong>store</strong>.</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="280" data-line-end="282">Ejecutar migración:
+<li class="has-line-data" data-line-start="282" data-line-end="284">Ejecutar migración:
 <ul>
-<li class="has-line-data" data-line-start="281" data-line-end="282">$ php artisan migrate</li>
+<li class="has-line-data" data-line-start="283" data-line-end="284">$ php artisan migrate</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="282" data-line-end="286">Importar el controlador <strong>FilesController</strong> en el archivo de rutas <strong>routes\web.php</strong>:<pre><code class="has-line-data" data-line-start="284" data-line-end="286" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Controllers</span>\<span class="hljs-title">FilesController</span>;
+<li class="has-line-data" data-line-start="284" data-line-end="288">Importar el controlador <strong>FilesController</strong> en el archivo de rutas <strong>routes\web.php</strong>:<pre><code class="has-line-data" data-line-start="286" data-line-end="288" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Controllers</span>\<span class="hljs-title">FilesController</span>;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="286" data-line-end="293">Agregar las rutas para el CRUD File en <strong>routes\web.php</strong>:<pre><code class="has-line-data" data-line-start="288" data-line-end="293" class="language-php">Route::get(<span class="hljs-string">'files'</span>, [FilesController::class, <span class="hljs-string">'index'</span>])-&gt;name(<span class="hljs-string">'user.files.index'</span>);
+<li class="has-line-data" data-line-start="288" data-line-end="295">Agregar las rutas para el CRUD File en <strong>routes\web.php</strong>:<pre><code class="has-line-data" data-line-start="290" data-line-end="295" class="language-php">Route::get(<span class="hljs-string">'files'</span>, [FilesController::class, <span class="hljs-string">'index'</span>])-&gt;name(<span class="hljs-string">'user.files.index'</span>);
 Route::post(<span class="hljs-string">'upload'</span>, [FilesController::class, <span class="hljs-string">'store'</span>])-&gt;name(<span class="hljs-string">'user.files.store'</span>);
 Route::get(<span class="hljs-string">'files/{file}'</span>, [FilesController::class, <span class="hljs-string">'show'</span>])-&gt;name(<span class="hljs-string">'user.files.show'</span>);
 Route::delete(<span class="hljs-string">'delete/{file}'</span>, [FilesController::class, <span class="hljs-string">'destroy'</span>])-&gt;name(<span class="hljs-string">'user.files.destroy'</span>);
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="293" data-line-end="337">Crear menú <strong>Mis archivos</strong> en la plantilla de navegación <strong>resources\views\layouts\navigation.blade.php</strong>:<pre><code class="has-line-data" data-line-start="295" data-line-end="337" class="language-php">&lt;nav x-data="{ open: false }" class="bg-white border-b border-gray-100"&gt;
+<li class="has-line-data" data-line-start="295" data-line-end="339">Crear menú <strong>Mis archivos</strong> en la plantilla de navegación <strong>resources\views\layouts\navigation.blade.php</strong>:<pre><code class="has-line-data" data-line-start="297" data-line-end="339" class="language-php">&lt;nav x-data="{ open: false }" class="bg-white border-b border-gray-100"&gt;
     &lt;!-- Primary Navigation Menu --&gt;
     &lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;
         &lt;div class="flex justify-between h-16"&gt;
@@ -393,7 +395,7 @@ Route::delete(<span class="hljs-string">'delete/{file}'</span>, [FilesController
 &lt;/nav&gt;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="337" data-line-end="365">Modificar la vista <strong>dashboard</strong> (resources\views\dashboard.blade.php):<pre><code class="has-line-data" data-line-start="339" data-line-end="365" class="language-php">&lt;x-app-layout&gt;
+<li class="has-line-data" data-line-start="339" data-line-end="367">Modificar la vista <strong>dashboard</strong> (resources\views\dashboard.blade.php):<pre><code class="has-line-data" data-line-start="341" data-line-end="367" class="language-php">&lt;x-app-layout&gt;
     &lt;x-slot name="header"&gt;
         &lt;h2 class="font-semibold text-xl text-gray-800 leading-tight"&gt;
             {{ __('Dashboard') }}
@@ -420,27 +422,28 @@ Route::delete(<span class="hljs-string">'delete/{file}'</span>, [FilesController
 &lt;/x-app-layout&gt;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="365" data-line-end="367">Crear enlace simbólico de public a storage:
+<li class="has-line-data" data-line-start="367" data-line-end="369">Crear enlace simbólico de public a storage:
 <ul>
-<li class="has-line-data" data-line-start="366" data-line-end="367">$ php artisan storage:link</li>
+<li class="has-line-data" data-line-start="368" data-line-end="369">$ php artisan storage:link</li>
 </ul>
 </li>
-<li class="has-line-data" data-line-start="367" data-line-end="373">Importar el modelo <strong>File</strong> y los facades <strong>Auth</strong> y <strong>Storage</strong> en el controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="369" data-line-end="373" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">File</span>;
+<li class="has-line-data" data-line-start="369" data-line-end="376">Importar el modelo <strong>File</strong> y los facades <strong>Auth</strong> y <strong>Storage</strong> en el controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="371" data-line-end="376" class="language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">File</span>;
 <span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Support</span>\<span class="hljs-title">Facades</span>\<span class="hljs-title">Auth</span>;
 <span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Support</span>\<span class="hljs-title">Facades</span>\<span class="hljs-title">Storage</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Support</span>\<span class="hljs-title">Str</span>;
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="373" data-line-end="381">Programar el método <strong>index</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="375" data-line-end="381" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>
+<li class="has-line-data" data-line-start="376" data-line-end="384">Programar el método <strong>index</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="378" data-line-end="384" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>
 </span>{
     <span class="hljs-variable">$files</span> = File::whereUserId(Auth::id())-&gt;latest()-&gt;get();
     <span class="hljs-keyword">return</span> view(<span class="hljs-string">'index'</span>, compact(<span class="hljs-string">'files'</span>));
 }
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="381" data-line-end="437">Crear vista para el método <strong>index</strong> (resources\views\index.blade.php) del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="383" data-line-end="435" class="language-php">&lt;x-app-layout&gt;
+<li class="has-line-data" data-line-start="384" data-line-end="440">Crear vista para el método <strong>index</strong> (resources\views\index.blade.php) del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="386" data-line-end="438" class="language-php">&lt;x-app-layout&gt;
     &lt;x-slot name="header"&gt;
         &lt;h2 class="font-semibold text-xl text-gray-800 leading-tight"&gt;
-            {{ __('Dashboard') }}
+            Mis archivos
         &lt;/h2&gt;
     &lt;/x-slot&gt;
 
@@ -491,7 +494,7 @@ Route::delete(<span class="hljs-string">'delete/{file}'</span>, [FilesController
 </code></pre>
 <strong>Nota</strong>: Puedes seleccionar un modelo de tabla de bootstrap para el diseño del la vista index en:<br>
 URL: <a href="https://getbootstrap.com">https://getbootstrap.com</a></li>
-<li class="has-line-data" data-line-start="437" data-line-end="465">Programar el método <strong>store</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="439" data-line-end="465" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">(Request <span class="hljs-variable">$request</span>)</span>
+<li class="has-line-data" data-line-start="440" data-line-end="468">Programar el método <strong>store</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="442" data-line-end="468" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">(Request <span class="hljs-variable">$request</span>)</span>
 </span>{
     <span class="hljs-variable">$max_size</span> = (int)ini_get(<span class="hljs-string">'upload_max_filesize'</span>) * <span class="hljs-number">10240</span>;
     <span class="hljs-variable">$files</span> = <span class="hljs-variable">$request</span>-&gt;file(<span class="hljs-string">'files'</span>);
@@ -518,22 +521,77 @@ URL: <a href="https://getbootstrap.com">https://getbootstrap.com</a></li>
 }
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="465" data-line-end="469">Programar el método <strong>show</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="467" data-line-end="469" class="language-php">***
+<li class="has-line-data" data-line-start="468" data-line-end="486">Programar el método <strong>show</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="470" data-line-end="486" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-variable">$id</span>)</span>
+</span>{
+    <span class="hljs-variable">$file</span> = File::whereCodeName(<span class="hljs-variable">$id</span>)-&gt;firstOrFail();
+    <span class="hljs-variable">$user_id</span> = Auth::id();
+    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$file</span>-&gt;user_id == <span class="hljs-variable">$user_id</span>){
+        <span class="hljs-comment">//return redirect(storage_path().'/app/public/'.$user_id.'/'.$file-&gt;code_name);</span>
+        <span class="hljs-keyword">return</span> response()-&gt;file(storage_path().<span class="hljs-string">'/app/public/'</span>.<span class="hljs-variable">$user_id</span>.<span class="hljs-string">'/'</span>.<span class="hljs-variable">$file</span>-&gt;code_name);
+    } <span class="hljs-keyword">else</span> {
+        Alert::error(<span class="hljs-string">'¡Error!'</span>, <span class="hljs-string">'No tiene permisos para ver este archivo'</span>);
+        <span class="hljs-keyword">return</span> back();
+
+        <span class="hljs-comment">// También se puede colocar</span>
+        <span class="hljs-comment">// abort(403);</span>
+    }
+}
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="469" data-line-end="473">Programar el método <strong>destroy</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="471" data-line-end="473" class="language-php">***
+<li class="has-line-data" data-line-start="486" data-line-end="503">Programar el método <strong>destroy</strong> del controlador <strong>app\Http\Controllers\FilesController.php</strong>:<pre><code class="has-line-data" data-line-start="488" data-line-end="503" class="language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroy</span><span class="hljs-params">(Request <span class="hljs-variable">$request</span>, <span class="hljs-variable">$id</span>)</span>
+</span>{
+    <span class="hljs-variable">$file</span> = File::whereCodeName(<span class="hljs-variable">$id</span>)-&gt;firstOrFail();
+    
+    <span class="hljs-comment">// Borra el archivo del storage o almacenamiento</span>
+    <span class="hljs-variable">$archivo</span> = storage_path().<span class="hljs-string">'/app/public/'</span>.Auth::id().<span class="hljs-string">'/'</span>.<span class="hljs-variable">$file</span>-&gt;code_name;
+    unlink(<span class="hljs-variable">$archivo</span>);
+
+    <span class="hljs-comment">// Borra el registro de la bd</span>
+    <span class="hljs-variable">$file</span>-&gt;delete();
+
+    Alert::info(<span class="hljs-string">'Atención!'</span>, <span class="hljs-string">'Se ha eliminado el archivo'</span>);
+    <span class="hljs-keyword">return</span> back();
+}
 </code></pre>
 </li>
-<li class="has-line-data" data-line-start="473" data-line-end="477">Realizar commit MVC File:
+<li class="has-line-data" data-line-start="503" data-line-end="508">Realizar commit MVC File:
 <ul>
-<li class="has-line-data" data-line-start="474" data-line-end="475">$ git add .</li>
-<li class="has-line-data" data-line-start="475" data-line-end="476">$ git commit -m “MVC File”</li>
-<li class="has-line-data" data-line-start="476" data-line-end="477">$ git push -u origin main</li>
+<li class="has-line-data" data-line-start="504" data-line-end="505">$ git add .</li>
+<li class="has-line-data" data-line-start="505" data-line-end="506">$ git commit -m “MVC File”</li>
+<li class="has-line-data" data-line-start="506" data-line-end="508">$ git push -u origin main</li>
 </ul>
 </li>
 </ol>
-<p class="has-line-data" data-line-start="479" data-line-end="482">OJO: Solventar problema:<br>
-Forbidden<br>
-You don’t have permission to access this resource.</p>
-<p class="has-line-data" data-line-start="483" data-line-end="484">Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/7.4.15 Server at file.test Port 80</p>
+<h2 class="code-line" data-line-start=508 data-line-end=509><a id="Actualizar_instructivo_508"></a>Actualizar instructivo:</h2>
+<ol>
+<li class="has-line-data" data-line-start="509" data-line-end="510">Copiar todo el contenido de este archivo Markdown (<strong><a href="http://apuntes.md">apuntes.md</a></strong>).</li>
+<li class="has-line-data" data-line-start="510" data-line-end="511">Ir a <a href="https://dillinger.io">https://dillinger.io</a> y convertir nuestro archivo de <strong>Markdown</strong> a <strong>HTML</strong>.</li>
+<li class="has-line-data" data-line-start="511" data-line-end="513">Exportar como <strong>Styled HTML</strong> y guardar este archivo como <strong>public\instructivo.html</strong> reemplazando así al existente.</li>
+</ol>
+<h2 class="code-line" data-line-start=513 data-line-end=514><a id="Actualizar_proyecto_en_Heroku_513"></a>Actualizar proyecto en Heroku:</h2>
+<ol>
+<li class="has-line-data" data-line-start="514" data-line-end="518">Realizar commit final:
+<ul>
+<li class="has-line-data" data-line-start="515" data-line-end="516">$ git add .</li>
+<li class="has-line-data" data-line-start="516" data-line-end="517">$ git commit -m “Proyecto terminado V1”</li>
+<li class="has-line-data" data-line-start="517" data-line-end="518">$ git push -u origin main</li>
+</ul>
+</li>
+<li class="has-line-data" data-line-start="518" data-line-end="528">Abrir nueva terminal para trabajar en heroku
+<ol>
+<li class="has-line-data" data-line-start="519" data-line-end="520">$ heroku login</li>
+<li class="has-line-data" data-line-start="520" data-line-end="521">$ git remote add heroku <a href="https://git.heroku.com/solucionespp-file.git">git.heroku.com/solucionespp-file.git</a></li>
+<li class="has-line-data" data-line-start="521" data-line-end="522">$ heroku git:remote -a solucionespp-file</li>
+<li class="has-line-data" data-line-start="522" data-line-end="523">$ heroku run bash</li>
+<li class="has-line-data" data-line-start="523" data-line-end="524">~ $ php artisan storage:link</li>
+<li class="has-line-data" data-line-start="524" data-line-end="526">~ $ php artisan migrate
+<ul>
+<li class="has-line-data" data-line-start="525" data-line-end="526">Do you really wish to run this command? (yes/no) [no]: yes</li>
+</ul>
+</li>
+<li class="has-line-data" data-line-start="526" data-line-end="527">~ $ exit</li>
+<li class="has-line-data" data-line-start="527" data-line-end="528">$ heroku logout</li>
+</ol>
+</li>
+</ol>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
